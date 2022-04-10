@@ -1,3 +1,5 @@
+#pragma once
+
 #include "table.h"
 
 class Unsorted_table : public Table {
