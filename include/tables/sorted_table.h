@@ -15,33 +15,23 @@ public:
     }
 
     void remove(unsigned int key) {
-        unsigned long index = binary_search(key);
-        if (index != -1){
-            table[index].is_deleted = true;
+        Row *row = binary_search(key);
+        if (row) {
+            row->is_deleted = true;
         }
-        if (removed_rows_counter > table.size() / 2) {
-            for (int i = 0; i < table.size(); i++) {
-                if (table[i].is_deleted) {
-                    table.erase(table.begin() + i);
-                };
-            }
-            removed_rows_counter = 0;
-        }
-
-
+        clear();
     }
 
     Polinom *find(unsigned long key) {
-        unsigned long index = binary_search(key);
-        if (index != -1){
-            return  table[index].polinom;
-        } else {
-            return nullptr;
+        Row *row = binary_search(key);
+        if (row) {
+            return row->polinom;
         }
+        return nullptr;
     }
 
 private:
-    unsigned long binary_search(unsigned long key) {
+    Row *binary_search(unsigned long key) {
         unsigned long middle;
         unsigned long left = 0;
         unsigned long right = table.size() - 1;
@@ -53,10 +43,10 @@ private:
             } else if (key > table[middle].key) {
                 left = middle + 1;
             } else {
-                return middle;
+                return &table[middle];
             }
             if (left > right) {
-                return -1;
+                return nullptr;
             }
         }
     }

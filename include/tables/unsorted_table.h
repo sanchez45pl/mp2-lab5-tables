@@ -11,20 +11,25 @@ public:
     }
 
     void remove(unsigned int key) {
-
-        if (removed_rows_counter > table.size() / 2) {
-            for (int i = 0; i < table.size(); i++) {
-                if (table[i].is_deleted) {
-                    table.erase(table.begin() + i);
-                };
-            }
-            removed_rows_counter = 0;
+        Row *row = linear_search(key);
+        if (row) {
+            row->is_deleted = true;
         }
+        clear();
     }
 
-    Polinom *find(int key) {
-        for (Row &row: table) {
-            if (row.key == key) return row.polinom;
+    Polinom *find(unsigned long key) {
+        Row *row = linear_search(key);
+        if (row) {
+            return row->polinom;
+        }
+        return nullptr;
+    }
+
+private:
+     Row* linear_search(unsigned long key){
+        for (auto & row : table) {
+            if (row.key == key) return &row;
         }
         return nullptr;
     }
