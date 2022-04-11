@@ -7,33 +7,9 @@
 class Table {
 public:
     std::vector<Row> table;
-    unsigned int removed_rows_counter;
+    unsigned long removed_rows_counter;
 
     Table() : removed_rows_counter(0) {};
-
-    void remove(unsigned int key) {
-        for (Row &row: table) {
-            if (row.key == key) {
-                row.is_deleted = true;
-                removed_rows_counter++;
-            }
-        }
-        if (removed_rows_counter > table.size() / 2) {
-            for (int i = 0; i < table.size(); i++) {
-                if (table[i].is_deleted) {
-                    table.erase(table.begin() + i);
-                };
-            }
-            removed_rows_counter = 0;
-        }
-    }
-
-    Polinom *find(int key) {
-        for (Row &row: table) {
-            if (row.key == key) return row.polinom;
-        }
-        return nullptr;
-    }
 
     virtual void print() {
         unsigned int max_key = 0;
@@ -53,5 +29,6 @@ public:
                 row.polinom->print();
             }
         }
+        cout << endl;
     }
 };
