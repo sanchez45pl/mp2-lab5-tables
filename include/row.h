@@ -7,8 +7,24 @@ struct Row {
     Polinom *polinom;
     bool is_deleted;
 
-    Row(unsigned long key, Polinom *polinom) :
+    Row(unsigned long key, Polinom *polinom) : key(key), polinom(polinom), is_deleted(false) {};
+};
+
+
+struct Hash_row {
+    unsigned long key;
+    Polinom *polinom;
+    Hash_row *next_row;
+
+
+    Hash_row() :
+            key(0),
+            polinom(nullptr),
+            next_row(nullptr) {};
+
+    Hash_row(unsigned long key, Polinom *polinom) :
             key(key),
             polinom(polinom),
-            is_deleted(false) {};
+            next_row(nullptr){};
 };
+
