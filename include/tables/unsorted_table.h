@@ -1,13 +1,14 @@
 #pragma once
 
-#include "table.h"
+#include "include/common/table.h"
 
 class Unsorted_table : public Table {
 public:
     Unsorted_table() = default;
 
-    void push_back(Row row) {
-        table.push_back(row);
+    void insert(unsigned int key, Polinom *polinom) {
+        Row new_row = Row(key, polinom);
+        table.push_back(new_row);
     }
 
     void remove(unsigned int key) {

@@ -1,17 +1,18 @@
 #pragma once
 
-#include "table.h"
+#include "include/common/table.h"
 
 class Sorted_table : public Table {
 public:
     Sorted_table() = default;
 
-    void insert(Row row) {
+    void insert(unsigned int key, Polinom *polinom) {
+        Row new_row = Row(key, polinom);
         auto iterator = table.begin();
-        while (iterator != table.end() && iterator->key < row.key) {
+        while (iterator != table.end() && iterator->key < key) {
             iterator++;
         }
-        table.insert(iterator, row);
+        table.insert(iterator, new_row);
     }
 
     void remove(unsigned int key) {
