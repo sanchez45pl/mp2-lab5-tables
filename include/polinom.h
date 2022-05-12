@@ -1,5 +1,7 @@
 #include <iostream>
+
 using namespace std;
+
 struct Monom {
     float coefficient;
     int powers;
@@ -18,7 +20,9 @@ struct Monom {
     }
 
     int x_power() const { return this->powers / 100; }
+
     int y_power() const { return this->powers / 10 % 10; }
+
     int z_power() const { return this->powers % 10; }
 
 
@@ -133,48 +137,48 @@ private:
     }
 };
 
-Polinom operator+(Polinom first_polinom, Polinom second_polinom) {
-    Polinom new_polinom;
+Polinom *operator+(Polinom first_polinom, Polinom second_polinom) {
+    Polinom *new_polinom = new Polinom;
     Monom *current_monom = first_polinom.first_monom;
     while (current_monom) {
-        new_polinom.add_monom(current_monom->coefficient, current_monom->powers);
+        new_polinom->add_monom(current_monom->coefficient, current_monom->powers);
         current_monom = current_monom->next_monom;
     }
     current_monom = second_polinom.first_monom;
     while (current_monom) {
-        new_polinom.add_monom(current_monom->coefficient, current_monom->powers);
+        new_polinom->add_monom(current_monom->coefficient, current_monom->powers);
         current_monom = current_monom->next_monom;
     }
     return new_polinom;
 }
 
-Polinom operator-(Polinom first_polinom, Polinom second_polinom) {
-    Polinom new_polinom;
+Polinom *operator-(Polinom first_polinom, Polinom second_polinom) {
+    Polinom *new_polinom = new Polinom;
     Monom *current_monom = first_polinom.first_monom;
     while (current_monom) {
-        new_polinom.add_monom(current_monom->coefficient, current_monom->powers);
+        new_polinom->add_monom(current_monom->coefficient, current_monom->powers);
         current_monom = current_monom->next_monom;
     }
     current_monom = second_polinom.first_monom;
     while (current_monom) {
-        new_polinom.add_monom((-1) * current_monom->coefficient, current_monom->powers);
+        new_polinom->add_monom((-1) * current_monom->coefficient, current_monom->powers);
         current_monom = current_monom->next_monom;
     }
     return new_polinom;
 }
 
-Polinom operator*(float number, Polinom polinom) {
-    Polinom new_polinom;
+Polinom *operator*(float number, Polinom polinom) {
+    Polinom *new_polinom = new Polinom;
     Monom *current_monom = polinom.first_monom;
     while (current_monom) {
-        new_polinom.add_monom(number * current_monom->coefficient, current_monom->powers);
+        new_polinom->add_monom(number * current_monom->coefficient, current_monom->powers);
         current_monom = current_monom->next_monom;
     }
     return new_polinom;
 }
 
-Polinom operator*(Polinom first_polinom, Polinom second_polinom) {
-    Polinom new_polinom;
+Polinom *operator*(Polinom first_polinom, Polinom second_polinom) {
+    Polinom *new_polinom = new Polinom;
     Monom *current_monom_from_first = first_polinom.first_monom;
     Monom *current_monom_from_second = second_polinom.first_monom;
     while (current_monom_from_first) {
@@ -186,7 +190,7 @@ Polinom operator*(Polinom first_polinom, Polinom second_polinom) {
                 powers % 10 < current_monom_from_first->z_power()) {
                 throw runtime_error("Get power out of range while multiplying");
             } else {
-                new_polinom.add_monom(coefficient, powers);
+                new_polinom->add_monom(coefficient, powers);
                 current_monom_from_second = current_monom_from_second->next_monom;
             }
 
