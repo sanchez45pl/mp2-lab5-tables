@@ -15,8 +15,11 @@ void save(Union_of_tables *tables, Polinom *new_polinom){
         while (key == 0) {
             cout << "Enter key of polinom: ";
             cin >> key;
+            cout << "Done" << endl << endl;
         }
         tables->insert(key, new_polinom);
+    } else {
+        cout << endl;
     }
 }
 
@@ -35,14 +38,15 @@ int main() {
         cout << "\t" << "4 - operate with created polinoms" << endl;
         cout << "\t" << "0 - exit" << endl;
         cin >> main_menu_command;
+        cout << endl;
         if (main_menu_command == 1) {
             auto *new_polinom = new Polinom();
             float coefficient;
             int powers;
             int should_continue = true;
             unsigned long key = 0;
+            cout << "Creating polinom" << endl;
             while (should_continue) {
-                cout << "Creating polinom" << endl;
                 cout << "\t" << "Adding monom:" << endl;
                 cout << "\t " << "Enter coefficient of monom: ";
                 cin >> coefficient;
@@ -57,6 +61,7 @@ int main() {
             while (key == 0) {
                 cout << "Enter key of polinom: ";
                 cin >> key;
+                cout << "Done" << endl << endl;
             }
             created_polinoms.insert(key, new_polinom);
         }else if (main_menu_command == 2) {
@@ -68,8 +73,9 @@ int main() {
             Polinom *polinom = created_polinoms.find(key);
             if (polinom) {
                 polinom->print();
+                cout << endl;
             } else {
-                cout << "Not found" << endl;
+                cout << "Not found" << endl << endl;
             }
         } else if (main_menu_command == 3) {
             created_polinoms.print();
@@ -83,6 +89,7 @@ int main() {
                 cout << "\t" << "4 - multiplication by polinom" << endl;
                 cout << "\t" << "0 - back" << endl;
                 cin >> operation_menu_command;
+                cout << endl;
                 if (operation_menu_command == 1) {
                     unsigned long key1, key2;
 
@@ -94,6 +101,7 @@ int main() {
                     cout << "Second: ";
                     cin >> key2;
                     new_polinom = *created_polinoms.find(key1) + *created_polinoms.find(key2);
+                    cout << "Result: ";
                     new_polinom->print();
 
                     save(&created_polinoms, new_polinom);
@@ -107,6 +115,7 @@ int main() {
                     cout << "Second: ";
                     cin >> second_polinom;
                     new_polinom = *created_polinoms.find(first_polinom) - *created_polinoms.find(second_polinom);
+                    cout << "Result: ";
                     new_polinom->print();
 
                     save(&created_polinoms, new_polinom);
@@ -120,6 +129,7 @@ int main() {
                     cout << "Enter constant: ";
                     cin >> constant;
                     new_polinom = constant * *created_polinoms.find(polinom);
+                    cout << "Result: ";
                     new_polinom->print();
 
                     save(&created_polinoms, new_polinom);
@@ -134,6 +144,7 @@ int main() {
                     cout << "Second: ";
                     cin >> second_polinom;
                     new_polinom = *created_polinoms.find(first_polinom) * *created_polinoms.find(second_polinom);
+                    cout << "Result: ";
                     new_polinom->print();
 
                     save(&created_polinoms, new_polinom);

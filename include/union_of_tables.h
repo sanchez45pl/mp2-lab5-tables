@@ -40,6 +40,6 @@ public:
         sorted_table.print();
         cout << "Unsorted table" << endl;
         unsorted_table.print();
-        cout << string(80, '-') << endl;
+        cout << endl;
     }
 };

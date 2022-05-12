@@ -40,6 +40,5 @@ public:
                 row.polinom->print();
             }
         }
-        cout << endl;
     }
 };
