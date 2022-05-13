@@ -1,3 +1,4 @@
+# [Отчет по лабораторой работе](https://docs.google.com/document/d/1qrTqV6_N4V8pj5OyjIInxXLjv4IwIiRcvaEOooUZEgU/edit?usp=sharing)
 # ЛР 5. Таблицы
 
 __Цель работы:__ 
